@@ -67,7 +67,7 @@ class GameScreen implements Screen {
 
     // COMUNICACIONS (rebuda de missatges)
     /////////////////////////////////////////////
-    class MyWSListener implements WebSocketListener {
+    static class MyWSListener implements WebSocketListener {
 
         @Override
         public boolean onOpen(WebSocket webSocket) {

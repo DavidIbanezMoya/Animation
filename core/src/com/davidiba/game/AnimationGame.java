@@ -1,5 +1,6 @@
 package com.davidiba.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.czyzby.websocket.WebSocket;
 import com.github.czyzby.websocket.WebSocketListener;
+import com.github.czyzby.websocket.WebSockets;
 
 public class AnimationGame extends ApplicationAdapter implements WebSocketListener {
 	SpriteBatch batch;
@@ -120,8 +122,15 @@ public class AnimationGame extends ApplicationAdapter implements WebSocketListen
 		downPad = new Rectangle(0, 0, 800, 400/3);
 		leftPad = new Rectangle(0, 0, 800/3, 400);
 		rightPad = new Rectangle(800*2/3, 0, 800/3, 400);
+		if( Gdx.app.getType()== Application.ApplicationType.Android )
+			// en Android el host és accessible per 10.0.2.2
+			address = "10.0.2.2";
+		socket = WebSockets.newSocket(WebSockets.toWebSocketUrl(address, port));
+		socket.setSendGracefully(false);
+		socket.addListener((WebSocketListener) new AnimationGame().MyWSListener());
 		socket.connect();
-
+		socket.send("Enviar dades");
+	}
 	}
 
 	@Override
