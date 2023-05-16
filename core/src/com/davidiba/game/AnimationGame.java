@@ -122,15 +122,14 @@ public class AnimationGame extends ApplicationAdapter implements WebSocketListen
 		downPad = new Rectangle(0, 0, 800, 400/3);
 		leftPad = new Rectangle(0, 0, 800/3, 400);
 		rightPad = new Rectangle(800*2/3, 0, 800/3, 400);
-		if( Gdx.app.getType()== Application.ApplicationType.Android )
+		/*if( Gdx.app.getType()== Application.ApplicationType.Android )
 			// en Android el host és accessible per 10.0.2.2
 			address = "10.0.2.2";
 		socket = WebSockets.newSocket(WebSockets.toWebSocketUrl(address, port));
 		socket.setSendGracefully(false);
 		socket.addListener((WebSocketListener) new AnimationGame().MyWSListener());
 		socket.connect();
-		socket.send("Enviar dades");
-	}
+		socket.send("Enviar dades");*/
 	}
 
 	@Override
@@ -177,7 +176,7 @@ public class AnimationGame extends ApplicationAdapter implements WebSocketListen
 		TextureRegion frame = gold.getKeyFrame(stateTime,true);
 		TextureRegion framePoke = typhlosionRegion.getKeyFrame(stateTime,true);
 
-		socket.send(direction);
+		//socket.send(direction);
 
 		batch.begin();
 
@@ -199,7 +198,6 @@ public class AnimationGame extends ApplicationAdapter implements WebSocketListen
 		typhlosion.dispose();
 	}
 
-	//todo Revisar el funcionamiento del metodo
 	public void walkDirection(String direction) {
 
 
